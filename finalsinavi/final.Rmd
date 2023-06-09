@@ -1,0 +1,119 @@
+---
+title: "New York'ta İşlenen Silahlı Suçların Ekonomik ve Sosyokültürel Analizi"
+author: 
+  - Atakan Bora Ceylan[^1]
+bibliography: ../bibliography/biblio.bib
+csl: ../csl/apa-tr.csl
+header-includes:
+  - \usepackage{polyglossia}
+  - \setmainlanguage{turkish}
+  - \usepackage{booktabs}
+  - \usepackage{caption} 
+  - \captionsetup[table]{skip=10pt}
+output:
+  bookdown::pdf_document2:
+    fig_caption: yes
+    fig_height: 3
+    fig_width: 4
+    keep_tex: no
+    latex_engine: xelatex
+    number_sections: yes
+    toc: no
+geometry: margin=1in
+link-citations: yes
+urlcolor: blue
+fontsize: 12pt
+biblio-style: apalike
+abstract: |
+  Bu çalışma, ekonomik ve sosyokültürel olarak tarih boyunca süregelen sistematik bir dışlanmışlığa maruz kalan, ghettolaşmaya mecbur bırakılmış toplumların suç oranlarına nasıl bir etki ettiğini inceledi. Yaptığım çalışmada ghettoda yaşayan siyahi-hispanik bireylerin daha fazla suç işlediği, ekonomik durumların da bunda büyük bir katkısı olduğunu gördük.Suç faaliyetinin genellikle sokak olması ve bireylerin ekonomik durumu kötüleştikçe suç oranlarının artması buna büyük bir kanıttır. Çözüm olarak ise bu insanlar hayatın her alanında topluma kazandırılmalı, ve toplum için çalışma anlayışı benimsetilmelidir. 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE, echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+<!-- ======================================================================= -->
+
+<!-- ============================== NOTLAR ================================= -->
+
+<!-- ======================================================================= -->
+[^1]: 20080267, [Github Repo](https://github.com/atakanboraceylan/finalsinavi.git)
+
+# Giriş
+
+Amerika Birleşik Devletleri'nde 19 Haziran 1865 tarihinde kölelik resmen kaldırılmıştır.1865'te başlayan bu süreç 1960'larda Hippi hareketi ve savaş karşıtı gösteriler gibi eylemler ile devam eden bu süreç ile ayrımcılık ve ırkçılık federal bir suç haline geldi.Bu süreçler sonucunda siyahi insanlar federal ve hukuksal olarak haklarını kazanmış olsalar da bu insanlar sistematik olarak ekonomik, ideolojik ve sosyokültürel olarak dışlanmış, mevcut sistemin dışına çıkarılmıştır. Tarih boyunca süregelen bu durum siyahi-hispanik toplumlarda aile kurumunun zayıflığı,ekonomik zayıflık,suç oranlarının yükselmesi ve gettolaşmaya yol açmıştır.
+
+## Çalışmanın Amacı
+
+Veriseti ABD açık veri portalından alınan (<https://catalog.data.gov/dataset/>) ve New York eyaletinin farklı bölgelerinde gerçekleşen 50 ayrı silahlı suçu inceleyen bu çalışmanın amacı suç işleyen ya da bu suçlara kurban giden insanların giriş bölümünde anlatılan sistematik olarak dışlanmışlığa maruz kalıp kalmadığını analiz etmektir. Bu analiz için 15 değişken (suçlunun ve kurbanın ırkı,yaş aralığı,suçun işlendiği bölge,suçlunun ekonomik durumu vs.) göze alınmıştır.
+
+## Literatür
+
+Yerli ve yabancı literatürde suç oranları ile gelir eşitsizliği, ırklar arası sınıfsal ayrım, yoksulluk ve gettolaşma arasındaki nedenselliği inceleyen birçok çalışma bulunmaktadır. Yerli çalışmalardan biri olan, Cüneyt Yenal Kesbiç & Özlem Dündar'ın yazdığı '' İşsizlik ve Suç Arasındaki İlişkiye Teorik Bir Bakış'' isimli makalede [@kesbicc2017icssizlik] Cüneyt Kesbiç ve Özlem Dündar suçun ekonomik yönüyle ilgili yapılmış çalışmalarda, ekonomik değişkenlerin suçu ne yönde etkilediği açısından fikir birliğine ulaşılamadığını, konuyla ilgili yapılmış yerli çalışmaları oldukça yetersiz düzeyde olduğunu belirtip bu durumun suç değişkeni ile ilgili veri elde etme konusunda yaşanan sıkıntılardan dolayı olduğunu yazmıştır. Fakat bu makalede incelenen konunun günümüzdeki son durumuna baktıklarında ise yoksulluk ile suç arasındaki ilişkiye yönelik fikir birliği olduğu görülmüştür. Yerli ve yabancı söz konusu çalışmaların neredeyse hepsinde, yoksulluğun suçu pozitif yönde etkilediği, özellikle de mala karşı işlenen suçların temel belirleyicisi olduğu, yoksullukta görülen artışın suç oranını arttırdığı şeklinde sonuçlara ulaşılmıştır. Bu çalışmalar sadece suç işleyen kişilerin bireysel olarak ekonomik durumundan kendini sorumlu tutmayıp, yaptığım çalışmanın amaçlarında belirttiğim gibi, ülkelerin geçmişteki sosyolojik yapısı, endüstrileşme sürecinin ne kadar hızla gerçekleştiği, göç oranları, dini ve etnik yapısının da suç oranlarında etkili olduğunu dile getirdiler.[@yiugitgelir] Üretim sürecine katılmaya çalışan insanlara yapılan sistematik dışlanmışlığın sosyokültürel bozulmaların ve suç oranlarının artışının hem sebebi hem sonucu olduğu savunulan görüşlerin olduğu makalelerde bu durumu oldukça pekiştiriyor. [@blau1982cost] ve [@mcgahey1986economic] Bu çalışmaların sadece teorik olarak değil, modelleme olarak da sınandığı ve aralarında korelasyon olmasının dışında nedensellik de olduğunu kanıtlayamaya çalışan denemeler mevcuttur.[@hipp2011ghettos] ve [@comertler2007turkiye]
+
+# Veri
+
+Evet, hayır ya da bazı cevapların hesaplama açısından kolaylık olması için (0,1) olarak adlandırıldığı Verisetimizde özet çıkaran tablo incelendiği zaman (Tablo \ref{tab:ozet}) çalışmamızın amacında sunduğumuz bazı gerekçeleri haklı çıkardığını görmek mümkündür. Suçun işlendiği bölgelerin ghetto olması (%86), suçlunun yaptığı eylemin yüksek bir oranda ilk suçu olmaması(sadece %27'sinin ilk suçu), suçlunun ve kurbanın ırklarının diğer ırklara göre sistematik dışlanmışlığa maruz kalan ırklardan olması (%70 siyahi suçlu ve %70 siyahi kurban) bunun başlıca göstergeleridir. Gerçekleşen bölgedeki ve cinsiyetlerdeki standart sapmanın küçük olması, verisetinin bize sorduğumuz sorulara doğru cevaplar verdiğinin kanıtıdır. Ekonomik durum konusunda ise standart sapma bize ortalamayı vermiştir.
+
+```{r echo=FALSE}
+library(tidyverse)
+library(here)
+survey <- read_csv(here("../data/nypdshootingdata.csv"))
+```
+
+```{r, echo=FALSE}
+library(xtable) 
+# devtools::install_github("emraher/summarytools")
+library(summarytools)
+st_options(lang = "tr")
+```
+
+```{r results='asis', echo=FALSE}
+survey %>%
+  select("GerceklesmeSaati", "GerceklestigiBolge", "SuclununIrki", "KurbaninIrki", "SucluEkonomikOlarakKotuSartlarIcindeMi", "SuclununIlkSucuMu", "SucluYasi", "KurbanYasi", "SuclununUyusturucuGecmisiVarMi", "SucluCinsiyeti", "KurbanCinsiyeti") %>% 
+  descr(stats = c("mean", "sd", "min", "med", "max"), transpose = TRUE) %>% 
+  xtable(caption = "Özet İstatistikler",
+         label = "tab:ozet",
+         align = c("l", "c", "c", "c", "c", "c")) %>% 
+  print(booktabs = TRUE, comment = FALSE, caption.placement = "top")
+```
+\newpage
+
+# Yöntem ve Veri Analizi
+
+Oluşturduğumuz özet istatistikler, bize suç oranları ve ekonomik durumun arasındaki ilişki hakkında çok fazla bilgi vermediğinden ikisini inceleyen bir grafikle durumu inceleyeceğiz.
+
+(Şekil \@ref(fig:plot) )'a baktığımızda suç işleme potansiyeli olan kişinin ekonomik durumunun kötületiştikçe suç işlemeye yatkın olduğunu ve suç işlediğini görüyoruz. Gittikçe daralan grafik ekonomik sürecin dışında kalan insanların suç işlemeye yatkın olduğunu gösteriyor.
+
+```{r plot, fig.align='center', fig.cap='Ekonomik Olarak Kötü Şartlar ve Suçlunun İlk Suçu mu Olduğunu Gösteren Grafik  ', echo=FALSE}
+survey %>% 
+  ggplot(aes(x = SucluEkonomikOlarakKotuSartlarIcindeMi, y = SuclununIlkSucuMu)) +
+  geom_point(na.rm = TRUE, colour = "purple", shape = 20, size = 5 ) +
+  geom_smooth() +
+  scale_x_continuous("SucluEkonomikOlarakKotuSartlarIcindeMi") + 
+  scale_y_continuous("SuclununIlkSucuMu")
+```
+\newpage
+
+(Şekil \@ref(fig:histogram))'da görüldüğü gibi suçlunun mensup olduğu ırk ve içinde bulunduğu ekonomik durum arasında korelasyon vardır. Bu korelasyonun nedenlerini teorik olarak da açıklamış olduğumuzu düşünüyoruz. Sistematik olarak dışlanan bu kesim, ekonomik durumunda meydana getirdiği nedenlerden dolayı daha fazla suça meyilli oluyor.
+
+```{r histogram, fig.align='center', fig.cap='Suçlunun Irkı ve Ekonomik Olarak Kötü Şartlar İçindemi Hakkındaki Tablo', echo=FALSE}
+ggplot(survey) +
+  aes(x = SuclununIrki) +
+  geom_histogram(binwidth = 0.10) +
+  scale_x_continuous(name = "SuclununIrki") +
+  scale_y_continuous(name = "SucluEkonomikOlarakKotuSartlarIcindeMi") +
+  ggtitle("")
+  
+```
+
+# Sonuç
+
+Çalışmamın sonuçlarında şunu görmüş oldum, sistematik olarak dışlanmışlığa maruz kalan ve ekonomik sürecin dışında bırakılan insanlar suç işlemeye daha meyilli oluyor. Suç oranlarının yaşanılan toplumun tarihsel süreçlerinde geçirdiği olaylardan etkilendiği teorisini bu şekilde kanıtlamaya çalıştım. Bu konuda çalışmalar yapılırken en büyük eksiklik veritabanının doğru analizi oluyor. Daha güçlü bir veritabanı ile bu çalışma daha fazla geliştirilebilir.
+
+\newpage
+
+# Kaynakça {#references}
+
+::: {#refs}
+:::
